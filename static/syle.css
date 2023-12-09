@@ -1,0 +1,12 @@
+#rekomend{
+    background-image: url('/static/default_image.jpg');
+    background-size: 800px cover;
+    background-position: top;
+    color: white;
+    padding-top: 300px;
+    padding-bottom: 20px;
+}
+
+.card{
+    margin: 20px auto 0px auto;
+}

@@ -28,11 +28,9 @@
       crossorigin="anonymous"
     ></script>
 
-    <style>
-      #rekom{
-        background-image:url("default_image.jpeg") ;
-      }
-    </style>
+    <!-- link Css -->
+    <link rel="stylesheet" href="/static/syle.css">
+
     <title>Home</title>
   </head>
   <body>
@@ -94,17 +92,47 @@
         </div>
       </nav>
 
-      <section class="hero is-medium is-link" id="rekom">
-        <div class="hero-body">
-            <img src="" height="200px" width="200px">
-          <p class="title">
-            Medium hero
-          </p>
-          <p class="subtitle">
-            Medium subtitle
-          </p>
-        </div>
+      <section class="section is-medium" id="rekomend">
+        <p>
+          <h1>Candi Borobudur</h1>
+          <h4>Magelang, Center Java</h4>
+        </p>
       </section>
+
+      <div class="content-wrap">
+        <div class="is-wrapped">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            <div class="card" style="width: 18rem;">
+              <img src="{{url_for('static', filename='default_card.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+          </div>
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            <div class="card" style="width: 18rem;">
+              <img src="{{url_for('static', filename='default_card.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+          </div>
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            <div class="card" style="width: 18rem;">
+              <img src="{{url_for('static', filename='default_card.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+          </div>
+          
+        </div>
+      </div>
 
   </body>
 </html>
