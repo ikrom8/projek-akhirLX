@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover</title>
+
+        <!-- link bulma -->
+        <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+      />
+      <!-- link bootstrap -->
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous"
+      />
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+      ></script>
+      <!-- Jquery CDN -->
+      <script
+        src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"
+      ></script>
+  
+      <!-- link Css -->
+      <link rel="stylesheet" href="/static/syle.css">
+</head>
+<body>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+         
+            <img src="{{url_for('static', filename = 'oracle_logo.png')}}" width="112" height="28">
+          
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="/">
+              Home
+            </a>
+      
+            <a class="navbar-item">
+              Cek Tiket
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  About
+                </a>
+                <a class="navbar-item">
+                  Contact
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                  Report an issue
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <section class="section is-medium" id="rekomend">
+        <p>
+          <h1>Candi Borobudur</h1>
+          <h4>Magelang, Center Java</h4>
+        </p>
+      </section>
+
+      <h1 style="margin-top: 10px;">Recomendations: </h1>
+      <div class="container text-center">
+        <div class="row row-cols-4">
+          <div class="col">
+          <div class="card" style="width: 18rem;">
+              <img src="{{url_for('static', filename='default_card.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="{{url_for('static', filename='default_card.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="{{url_for('static', filename='default_card.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="{{url_for('static', filename='default_card.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <h1>Find Destination</h1>
+        <div class="row">
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='asia.jpg')}}" alt="">
+          </div>
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='afrika.jpg')}}" alt="">
+          </div>
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='default_card.jpg')}}" alt="">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 20px;">
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='default_card.jpg')}}" alt="">
+          </div>
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='default_card.jpg')}}" alt="">
+          </div>
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='default_card.jpg')}}" alt="">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 20px;">
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='default_card.jpg')}}" alt="">
+          </div>
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='default_card.jpg')}}" alt="">
+          </div>
+          <div class="col">
+            <img class="is-32x32" src="{{url_for('static',filename='default_card.jpg')}}" alt="">
+          </div>
+        </div>
+      </section>
+
+      <div class="card">
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Traveluki</strong> by <a href="/about">Oracle Group</a>
+            <h6>Member : </h6>
+            <h6>- Maulana Osama Bilhaq</h6>
+            <h6>- Nur Ikrom Zahwan Hanif</h6>
+            <h6>- Yophiedzhar</h6>
+          </p>
+        </div>
+      </footer>
+    </div>
+       
+
+</body>
+</html>
