@@ -27,5 +27,13 @@ def discover():
 def detail():
     return render_template('detail.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/discoveradm')
+def discover_admin():
+    return render_template('discoveradm.html')
+
 if __name__== '__main__':
     app.run('0.0.0.0',port=5000, debug=True)

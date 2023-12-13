@@ -73,7 +73,7 @@ footer {
 
             <p>Tim kami terdiri dari para profesional di bidangnya, yang memiliki komitmen untuk memberikan pelayanan terbaik kepada pelanggan kami. Kami memahami bahwa setiap perjalanan dan pengalaman adalah unik, dan kami berusaha untuk memastikan setiap pelanggan mendapatkan layanan yang sesuai dengan kebutuhannya.</p>
 
-            <img src="gambarabout.jpg" alt="Wisata Image" style="max-width: 100%; height: auto; border-radius: 8px; margin-top: 20px;">
+            <img src="{{url_for('static', filename =  'gambarabout.jpg')}}" alt="Wisata Image" style="max-width: 100%; height: auto; border-radius: 8px; margin-top: 20px;">
 
         </section>
     </main>
@@ -81,9 +81,9 @@ footer {
     <footer>
         <p>ORACLE</p>
     <nav>
-        <a href="home.html">Home</a> |
+        <a href="/">Home</a> |
         <a href="layanan.html">Layanan</a> |
-        <a href="about.html">tentang kami</a>
+        <a href="/about">tentang kami</a>
     </nav>
     </footer>
 

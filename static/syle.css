@@ -32,8 +32,29 @@
     margin-bottom: 70px;
 }
 
-.picture{
+.card-detail{
     margin-top: 90px;
-    
+    height: 800px;
+    width: 900px;
+}
+
+#TgdProfile{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+}
+
+.btn{
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.table{
+    margin-top: 90px;
 }
 
