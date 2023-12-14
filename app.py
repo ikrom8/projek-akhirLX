@@ -35,6 +35,10 @@ def about():
 def discover_admin():
     return render_template('discoveradm.html')
 
+@app.route('/edit-detail')
+def edit_detail():
+    return render_template('edit_detail.html')
+
 
 
 if __name__== '__main__':
