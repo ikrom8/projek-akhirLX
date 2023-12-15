@@ -86,7 +86,17 @@ button {
           <input type="text" id="username" name="username" required><br>
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required><br>
-          <button type="submit">Login</button>
+          <div class="row">
+            <div class="col">
+              <button type="submit">Login</button>
+            </div>
+            <div class="col">
+              <button class="button is-outlined is-link" type="submit">Clear</button>
+            </div>
+          </div>
+          <button class="button is-danger"  style="margin-top: 10px;"><a href="/" style="color: black;">Cancel</a></button>
+          <h6 style="text-align: center; margin-top: 10px;">Sign up if you don't have an account</h6>
+          <button>Signup</button>
       </form>
   </div>
   </body>
