@@ -39,6 +39,14 @@ def discover_admin():
 def edit_detail():
     return render_template('edit_detail.html')
 
+@app.route('/editTGD')
+def edit_tgd():
+    return render_template('editTGD.html')
+
+@app.route('/addTGD')
+def add_tgd():
+    return render_template('addTGD.html')
+
 
 
 if __name__== '__main__':

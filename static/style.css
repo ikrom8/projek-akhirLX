@@ -63,4 +63,9 @@ table{
     margin-top: 50px;
 } 
 
-
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
