@@ -3,12 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ticket Checker</title>
+  <title>Cek Tiket</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <!-- Your custom CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <img src="{{url_for('static', filename = 'oracle_logo.png')}}" width="112" height="28">
+    <a class="navbar-brand" href="/about">Oracle</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Traveluki</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/discover">Discover</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">Tentang</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/sign_up">Registrasi</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</nav>  
 
 <style>
     /* Add your custom styles here */
@@ -25,36 +58,55 @@ body {
   margin: auto;
   margin-top: 50px;
 }
+.btn-black {
+    background-color: black;
+    color: white; 
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #000000   ;
+    color: #fff;
+}
+
+
 
 </style>
 <body>
 
 <div class="container mt-5">
-  <h1 class="mb-4">Ticket Checker</h1>
+  <h1 class="mb-4">Cek Tiket Anda</h1>
   <form action="/check_ticket" method="post">
     <div class="mb-3">
-      <label for="name" class="form-label">Name:</label>
+      <label for="name" class="form-label">Nama:</label>
       <input type="text" class="form-control" id="name" name="name" required>
     </div>
     <div class="mb-3">
-      <label for="date" class="form-label">Date:</label>
+      <label for="date" class="form-label">Tanggal:</label>
       <input type="date" class="form-control" id="date" name="date" required>
     </div>
     <div class="mb-3">
-      <label for="ticket_code" class="form-label">Ticket Code:</label>
+      <label for="ticket_code" class="form-label">Kode tiket:</label>
       <input type="text" class="form-control" id="ticket_code" name="ticket_code" required>
     </div>
     <div class="mb-3">
-      <label for="destination" class="form-label">Destination:</label>
+      <label for="destination" class="form-label">Detinasi:</label>
       <input type="text" class="form-control" id="destination" name="destination" required>
     </div>
     <div class="mb-3">
-      <label for="tourguide" class="form-label">Tour Guide:</label>
+      <label for="tourguide" class="form-label">Pemandu:</label>
       <input type="text" class="form-control" id="tourguide" name="tourguide" required>
     </div>
-    <button type="submit" class="btn btn-primary">Check Ticket</button>
+    <button type="submit" class="btn btn-primary btn-black">Cek Tiket</button>
   </form>
 </div>
+<footer>
+  <p>ORACLE</p>
+<nav>
+  <a href="/">Home</a> |
+  <a href="/about">tentang kami</a>
+</nav>
+</footer>
 
 <!-- Bootstrap JS and dependencies (optional) -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-LzHi0eIqUDlS2JCx84q+QzFkd+HaBqREK+g1Lr+ISdkt8e4HTt6PZL64/fCCY3ww" crossorigin="anonymous"></script>
