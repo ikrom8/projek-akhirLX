@@ -34,36 +34,43 @@
 
     <script>
       function posting() {
-      let title = $("#image-title").val();
-      if (!title) {
+      let image = $("#image-title").val();
+      if (!image) {
         return alert('Hey user, you forgot a title');
       }
-      let content = $("#image-description").val();
-      if (!content) {
+      let kategori = $("#category").val();
+      if (!kategori) {
+        return alert('Hey user, you forgot a title');
+      }
+      let place = $("#name").val();
+      if (!place) {
         return alert('Hey user, you forgot a description');
       }
+      let deskripsi = $("#description").val();
+      if (!deskripsi) {
+        return alert('Hey user, you forgot a description');
+      }
+      console.log(image,kategori,place,)
 
-      let file = $("#image").prop("files")[0];
-      let profile = $("#profil").prop("files")[0];
 
-      let form_data = new FormData();
+      // let form_data = new FormData();
 
-      form_data.append('file_give', file);
-      form_data.append('profile_give', profile);
-      form_data.append("title_give", title);
-      form_data.append("content_give", content);
+      // form_data.append('file_give', file);
+      // form_data.append('profile_give', profile);
+      // form_data.append("title_give", title);
+      // form_data.append("content_give", content);
 
-      $.ajax({
-        type: 'POST',
-        url: '/diary',
-        data: form_data,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-          console.log(response)
-          window.location.reload();
-        }
-      })
+      // $.ajax({
+      //   type: 'POST',
+      //   url: '/diary',
+      //   data: form_data,
+      //   contentType: false,
+      //   processData: false,
+      //   success: function (response) {
+      //     console.log(response)
+      //     window.location.reload();
+      //   }
+      // })
     }
     </script>
   </head>
@@ -131,11 +138,11 @@
 
     <section class="section is-medium">
       <div class="mb-3">
-        <label for="formFile" class="form-label">Choose Image </label>
-        <input class="form-control" type="file" id="formFile">
+        <label for="image-title" class="form-label">Choose Image </label>
+        <input class="form-control" type="file" id="image-title">
       </div>
       <div class="mb-3">
-        <label for="category" class="form-label">kategori</label>
+        <label for="category" class="form-label" >kategori</label>
         <input
           type="text"
           class="form-control"
@@ -148,7 +155,7 @@
         <input
           type="text"
           class="form-control"
-          id="category"
+          id="name"
           placeholder="place"
         />
       </div>
@@ -205,7 +212,7 @@
       </div>
       <div class="row" style="margin-top: 30px;">
         <div class="col">
-          <button type="button" class="btn btn-dark">Simpan</button>
+          <button type="button" class="btn btn-dark" onclick="posting()">Simpan</button>
         </div>
         <div class="col">
           <button type="button" class="btn btn-danger"><a href="/discoveradm" style="color: black; text-decoration: none;">Batal</a></button>
