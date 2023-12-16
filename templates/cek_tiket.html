@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Checker</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<style>
+    /* Add your custom styles here */
+body {
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 600px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  margin-top: 50px;
+}
+
+</style>
+<body>
+
+<div class="container mt-5">
+  <h1 class="mb-4">Ticket Checker</h1>
+  <form action="/check_ticket" method="post">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date:</label>
+      <input type="date" class="form-control" id="date" name="date" required>
+    </div>
+    <div class="mb-3">
+      <label for="ticket_code" class="form-label">Ticket Code:</label>
+      <input type="text" class="form-control" id="ticket_code" name="ticket_code" required>
+    </div>
+    <div class="mb-3">
+      <label for="destination" class="form-label">Destination:</label>
+      <input type="text" class="form-control" id="destination" name="destination" required>
+    </div>
+    <div class="mb-3">
+      <label for="tourguide" class="form-label">Tour Guide:</label>
+      <input type="text" class="form-control" id="tourguide" name="tourguide" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Check Ticket</button>
+  </form>
+</div>
+
+<!-- Bootstrap JS and dependencies (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-LzHi0eIqUDlS2JCx84q+QzFkd+HaBqREK+g1Lr+ISdkt8e4HTt6PZL64/fCCY3ww" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

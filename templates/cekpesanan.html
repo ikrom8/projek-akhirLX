@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detail</title>
+    <title>Cek Pesanan || Admin</title>
 
     <!-- link bulma -->
     <link
@@ -31,6 +31,7 @@
 
     <!-- link Css -->
     <link rel="stylesheet" href="/static/style.css" />
+
     <script>
       function sign_up() {
         let username = $("#input-username").val();
@@ -103,21 +104,20 @@
       }
 
       function post() {
-        let kategori = $('#category').val();
-        let nama = $('#name').val();
+        let comment = $("#textarea-post").val();
         let today = new Date().toISOString();
         $.ajax({
-          type : 'POST',
-          url  : '/posting',
-          data : {
-            comment_give:comment,
-            date_give : today
+          type: "POST",
+          url: "/posting",
+          data: {
+            comment_give: comment,
+            date_give: today,
           },
           success: function (response) {
-            $('#mdal-post').removeClass('is-active');
+            $("#mdal-post").removeClass("is-active");
             window.location.reload();
-          }
-        })
+          },
+        });
       }
     </script>
   </head>
@@ -160,15 +160,18 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/homeadmin"
-                  >Home</a
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/discoveradm"
+                  >Discover</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/cek-tiket">Cek Pesanan</a>
+                <a class="nav-link" href="/cekpesanan">Cek Pesanan</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
+                <a class="nav-link" href="/about">Tentang</a>
               </li>
             </ul>
           </div>
@@ -176,102 +179,35 @@
       </div>
     </nav>
 
-    <div style="margin-top: 90px">
-      <h1><center>Detail</center></h1>
+    <div class="title" style="margin-top: 90px">
+      <h1><center>Cek Pesanan</center></h1>
       <hr />
     </div>
 
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{{url_for('static', filename='default-image.jpg')}}" class="d-block w-100" alt="...">
+    <section class="hero is-large is-info">
+      <div class="hero-body">
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Nama Destinasi</h5>
+            <p class="card-text">Waktu ,Tanggal</p>
+            <div class="row">
+              <div class="col">
+                <a  class="btn btn-primary" onclick="">Terima</a>
+              </div>
+              <div class="col">
+                <a  class="btn btn-primary" onclick="">Tunda</a>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="carousel-item">
-          <img src="{{url_for('static', filename='default-image.jpg')}}" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="{{url_for('static', filename='default-image.jpg')}}" class="d-block w-100" alt="...">
-        </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-
-    <section class="section is-medium">
-      <div class="mb-3">
-        <label for="category" class="form-label">kategory</label>
-        <input
-          class="form-control"
-          type="text"
-          value="kategori"
-          aria-label="readonly input example"
-          readonly
-        />
-      </div>
-      <div class="mb-3">
-        <label for="category" class="form-label">Nama Tempat</label>
-        <input
-          class="form-control"
-          type="text"
-          value="Nama Tempat"
-          aria-label="readonly input example"
-          readonly
-        />
-      </div>
-      <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea
-          class="form-control"
-          id="description"
-          rows="3"
-          placeholder="Description"
-          aria-label="readonly input example"
-        ></textarea>
-      </div>
-
-      <div class="tourguide" style="margin-left: 80%;">
-        <h4>Tourguide :</h4>
-        <br />
-        <button class="btn is-link is-outlined">
-          <figure class="image is-128x128" style="margin-left: 15px;">
-            <img
-              class="is-rounded"
-              src="https://bulma.io/images/placeholders/128x128.png"
-            />
-          </figure>
-          Tourguide 1
-        </button>
-      </div>
-
-      <div class="tourguide" style="margin-left: 80%;">
-        <br />
-        <button class="btn is-link is-outlined">
-          <figure class="image is-128x128" style="margin-left: 15px;">
-            <img
-              class="is-rounded"
-              src="https://bulma.io/images/placeholders/128x128.png"
-            />
-          </figure>
-          Tourguide 2
-        </button>
-      </div>
-
-      <button type="button" class="btn btn-primary btn-lg" style="margin-top: 30px;">Pesan</button>
-
     </section>
-    <footer>
-      <p>ORACLE</p>
-  <nav>
-      <a href="/">Home</a> |
-      <a href="layanan.html">Layanan</a> |
-      <a href="/about">tentang kami</a>
-  </nav>
-  </footer>
   </body>
+  <footer style="margin-top: 20px">
+    <p>ORACLE</p>
+    <nav>
+      <a href="/">Home</a> | <a href="layanan.html">Layanan</a> |
+      <a href="/about">tentang kami</a>
+    </nav>
+  </footer>
 </html>

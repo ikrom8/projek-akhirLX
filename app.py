@@ -37,21 +37,10 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@app.route('/sign_up/save')
+
+@app.route('/sign_up')
 def sign_up():
-    username_receive = request.form['username_give']
-    password_receive = request.form['password_give']
-    password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
-    doc = {
-        "username": username_receive,                               # id
-        "password": password_hash,                                  # password
-        "profile_name": username_receive,                           # user's name is set to their id by default
-        "profile_pic": "",                                          # profile image file name
-        "profile_pic_real": "profile_pics/profile_placeholder.png", # a default profile image
-        "profile_info": ""                                          # a profile description
-    }
-    db.users.insert_one(doc)
-    return jsonify({'result': 'success'})
+    return render_template ('sign_up.html')
     
 
 @app.route('/login')
@@ -98,6 +87,26 @@ def add_tgd():
 @app.route('/adddestination')
 def add_destionation():
     return render_template('adddestination.html')
+
+@app.route('/detailadm')
+def detail_adm():
+    return render_template('detailadm.html')
+
+@app.route('/cekpesanan')
+def cek_pesanan():
+    return render_template('cekpesanan.html')
+
+@app.route('/cektiket')
+def cek_tiket():
+    return render_template('cek_tiket.html')
+
+@app.route('/check_ticket', methods=['POST'])
+def check_ticket():
+    name = request.form['name']
+    date = request.form['date']
+    ticket_code = request.form['ticket_code']
+    destination = request.form['destination']
+    tourguide = request.form['tourguide']
 
 
 
