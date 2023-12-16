@@ -102,6 +102,23 @@
           },
         });
       }
+
+      function post() {
+        let comment = $('#textarea-post').val();
+        let today = new Date().toISOString();
+        $.ajax({
+          type : 'POST',
+          url  : '/posting',
+          data : {
+            comment_give:comment,
+            date_give : today
+          },
+          success: function (response) {
+            $('#mdal-post').removeClass('is-active');
+            window.location.reload();
+          }
+        })
+      }
     </script>
   </head>
   <body>
@@ -181,7 +198,7 @@
           <th scope="row">img</th>
           <th scope="row">Bali</th>
           <td>Asia</td>
-          <td>lorem .... <a href="/detail">lainnya</a></td>
+          <td>lorem .... <a href="/edit-detail">lainnya</a></td>
           <td>Tourguide 1</td>
           <td>
             <button class="button is-link">
@@ -198,7 +215,7 @@
           <th scope="row">img</th>
           <th scope="row">Bali</th>
           <td>Asia</td>
-          <td>lorem .... <a href="/detail">lainnya</a></td>
+          <td>lorem .... <a href="/edit-detail">lainnya</a></td>
           <td>Tourguide 1</td>
           <td>
             <button class="button is-link">

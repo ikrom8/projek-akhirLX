@@ -31,6 +31,95 @@
 
     <!-- link Css -->
     <link rel="stylesheet" href="/static/style.css" />
+    <script>
+      function sign_up() {
+        let username = $("#input-username").val();
+        let password = $("#input-password").val();
+        let password2 = $("#input-password2").val();
+        console.log(username, password, password2);
+
+        if ($("#help-id").hasClass("is-danger")) {
+          alert("Please check your id");
+          return;
+        } else if (!$("#help-id").hasClass("is-success")) {
+          alert("Please double check your id");
+          return;
+        }
+
+        if (password === "") {
+          $("#help-password")
+            .text("Please enter your password")
+            .removeClass("is-safe")
+            .addClass("is-danger");
+          $("#input-password").focus();
+          return;
+        } else if (!is_password(password)) {
+          $("#help-password")
+            .text(
+              "Please check your password. For your password, please enter 8-20 English characters, numbers, or the following special characters (!@#$%^&*)"
+            )
+            .removeClass("is-safe")
+            .addClass("is-danger");
+          $("#input-password").focus();
+          return;
+        } else {
+          $("#help-password")
+            .text("This password can be used!")
+            .removeClass("is-danger")
+            .addClass("is-success");
+        }
+        if (password2 === "") {
+          $("#help-password2")
+            .text("Please enter your password")
+            .removeClass("is-safe")
+            .addClass("is-danger");
+          $("#input-password2").focus();
+          return;
+        } else if (password2 !== password) {
+          $("#help-password2")
+            .text("Your passwords do not match")
+            .removeClass("is-safe")
+            .addClass("is-danger");
+          $("#input-password2").focus();
+          return;
+        } else {
+          $("#help-password2")
+            .text("Your passwords do not match")
+            .removeClass("is-danger")
+            .addClass("is-success");
+        }
+        $.ajax({
+          type: "POST",
+          url: "/sign_up/save",
+          data: {
+            username_give: username,
+            password_give: password,
+          },
+          success: function (response) {
+            alert("Your are signed up! Nice!");
+            window.location.replace("/login");
+          },
+        });
+      }
+
+      function post() {
+        let kategori = $('#category').val();
+        let nama = $('#name').val();
+        let today = new Date().toISOString();
+        $.ajax({
+          type : 'POST',
+          url  : '/posting',
+          data : {
+            comment_give:comment,
+            date_give : today
+          },
+          success: function (response) {
+            $('#mdal-post').removeClass('is-active');
+            window.location.reload();
+          }
+        })
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-dark bg-dark fixed-top">
@@ -158,7 +247,7 @@
         <input
           type="text"
           class="form-control"
-          id="category"
+          id="name"
           placeholder="place"
         />
       </div>
@@ -212,7 +301,15 @@
           Add Tourguide
         </button>
       </div>
-        
+      
+      <div class="row" style="margin-top: 30px;">
+        <div class="col">
+          <button type="button" class="btn btn-dark">Save</button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
         
       </div>
     </section>

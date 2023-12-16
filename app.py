@@ -60,15 +60,16 @@ def login():
 
 @app.route('/discover')
 def discover():
-    token_receive = request.cookies.get("mytoken")
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.users.find_one({"username": payload["id"]})
-        return render_template('discover.html', user_info=user_info)
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="Your token has expired"))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="There was problem logging you in"))
+    # token_receive = request.cookies.get("mytoken")
+    # try:
+    #     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    #     user_info = db.users.find_one({"username": payload["id"]})
+    #     return render_template('discover.html', user_info=user_info)
+    # except jwt.ExpiredSignatureError:
+    #     return redirect(url_for("login", msg="Your token has expired"))
+    # except jwt.exceptions.DecodeError:
+    #     return redirect(url_for("login", msg="There was problem logging you in"))
+    return render_template('discover.html')
 
 @app.route('/detail')
 def detail():
