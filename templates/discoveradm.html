@@ -1,114 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Discover || Admin</title>
 
-        <!-- link bulma -->
-        <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-      />
-      <!-- link bootstrap -->
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous"
-      />
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"
-      ></script>
-      <!-- Jquery CDN -->
-      <script
-        src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"
-      ></script>
-  
-      <!-- link Css -->
-      <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-          <img src="{{url_for('static', filename = 'oracle_logo.png')}}" width="112" height="28">
-          <a class="navbar-brand" href="/about">Oracle</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Traveluki</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/homeadmin">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/cek-tiket">Cek Pesanan</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/about">About</a>
-                </li>
-              </ul>
+    <!-- link bulma -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <!-- link bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Jquery CDN -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
 
-            </div>
+    <!-- link Css -->
+    <link rel="stylesheet" href="/static/style.css" />
+
+    <script>
+      function sign_up() {
+        let username = $("#input-username").val();
+        let password = $("#input-password").val();
+        let password2 = $("#input-password2").val();
+        console.log(username, password, password2);
+
+        if ($("#help-id").hasClass("is-danger")) {
+          alert("Please check your id");
+          return;
+        } else if (!$("#help-id").hasClass("is-success")) {
+          alert("Please double check your id");
+          return;
+        }
+
+        if (password === "") {
+          $("#help-password")
+            .text("Please enter your password")
+            .removeClass("is-safe")
+            .addClass("is-danger");
+          $("#input-password").focus();
+          return;
+        } else if (!is_password(password)) {
+          $("#help-password")
+            .text(
+              "Please check your password. For your password, please enter 8-20 English characters, numbers, or the following special characters (!@#$%^&*)"
+            )
+            .removeClass("is-safe")
+            .addClass("is-danger");
+          $("#input-password").focus();
+          return;
+        } else {
+          $("#help-password")
+            .text("This password can be used!")
+            .removeClass("is-danger")
+            .addClass("is-success");
+        }
+        if (password2 === "") {
+          $("#help-password2")
+            .text("Please enter your password")
+            .removeClass("is-safe")
+            .addClass("is-danger");
+          $("#input-password2").focus();
+          return;
+        } else if (password2 !== password) {
+          $("#help-password2")
+            .text("Your passwords do not match")
+            .removeClass("is-safe")
+            .addClass("is-danger");
+          $("#input-password2").focus();
+          return;
+        } else {
+          $("#help-password2")
+            .text("Your passwords do not match")
+            .removeClass("is-danger")
+            .addClass("is-success");
+        }
+        $.ajax({
+          type: "POST",
+          url: "/sign_up/save",
+          data: {
+            username_give: username,
+            password_give: password,
+          },
+          success: function (response) {
+            alert("Your are signed up! Nice!");
+            window.location.replace("/login");
+          },
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <img
+          src="{{url_for('static', filename = 'oracle_logo.png')}}"
+          width="112"
+          height="28"
+        />
+        <a class="navbar-brand" href="/about">Oracle</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasDarkNavbar"
+          aria-controls="offcanvasDarkNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+              Traveluki
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/homeadmin"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/cek-tiket">Cek Pesanan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
 
-      <div class="title" style="margin-top: 90px;">  
+    <div class="title" style="margin-top: 90px">
       <h1><center>Data Destination</center></h1>
-      <hr>
+      <hr />
     </div>
 
     <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Gambar</th>
-            <th scope="col">Nama Tempat</th>
-            <th scope="col">Kategori</th>
-            <th scope="col">Deskripsi</th>
-            <th scope="col">Tourguide</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Hapus   ww</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">img</th>
-            <th scope="row">Bali</th>
-            <td>Asia</td>
-            <td>lorem .... <a href="/detail">lainnya</a></td>
-            <td>Tourguide 1</td>
-            <td><button class="button is-link"><a href="/edit-detail" style="color: white; text-decoration-line: none;">Edit</a></button></td>
-            <td><button class="button is-danger">Hapus</button></td>
-          </tr>
-          <tr>
-            <th scope="row">img</th>
-            <th scope="row">Bali</th>
-            <td>Asia</td>
-            <td>lorem .... <a href="/detail">lainnya</a></td>
-            <td>Tourguide 1</td>
-            <td><button class="button is-link"><a href="/edit-detail" style="color: white; text-decoration-line: none;">Edit</a></button></td>
-            <td><button class="button is-danger">Hapus</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <thead>
+        <tr>
+          <th scope="col">Gambar</th>
+          <th scope="col">Nama Tempat</th>
+          <th scope="col">Kategori</th>
+          <th scope="col">Deskripsi</th>
+          <th scope="col">Tourguide</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Hapus ww</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">img</th>
+          <th scope="row">Bali</th>
+          <td>Asia</td>
+          <td>lorem .... <a href="/detail">lainnya</a></td>
+          <td>Tourguide 1</td>
+          <td>
+            <button class="button is-link">
+              <a
+                href="/edit-detail"
+                style="color: white; text-decoration-line: none"
+                >Edit</a
+              >
+            </button>
+          </td>
+          <td><button class="button is-danger">Hapus</button></td>
+        </tr>
+        <tr>
+          <th scope="row">img</th>
+          <th scope="row">Bali</th>
+          <td>Asia</td>
+          <td>lorem .... <a href="/detail">lainnya</a></td>
+          <td>Tourguide 1</td>
+          <td>
+            <button class="button is-link">
+              <a
+                href="/edit-detail"
+                style="color: white; text-decoration-line: none"
+                >Edit</a
+              >
+            </button>
+          </td>
+          <td><button class="button is-danger">Hapus</button></td>
+        </tr>
+      </tbody>
+    </table>
 
-</body>
-<footer>
-  <p>ORACLE</p>
-<nav>
-  <a href="/">Home</a> |
-  <a href="layanan.html">Layanan</a> |
-  <a href="/about">tentang kami</a>
-</nav>
-</footer>
+    <button class="button is-link" style="margin-top: 20px;"><a href="/adddestination" style="color: black; text-decoration: none;">Add Destination</a></button>
+  </body>
+  <footer style="margin-top: 20px;">
+    <p>ORACLE</p>
+    <nav>
+      <a href="/">Home</a> | <a href="layanan.html">Layanan</a> |
+      <a href="/about">tentang kami</a>
+    </nav>
+  </footer>
 </html>
