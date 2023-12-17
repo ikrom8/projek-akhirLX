@@ -80,13 +80,37 @@ def edit_detail():
 def edit_tgd():
     return render_template('editTGD.html')
 
-@app.route('/addTGD')
+@app.route('/addTGD',)
 def add_tgd():
     return render_template('addTGD.html')
+
+# @app.route('/addTGD/save', methods=['POST'])
+# def save_tgd():
+#     name_receive = request.form.get('name_give')
+#     age_receive = request.form.get('umur_give')
+#     gender_receive = request.form.get('gender_give')
+#     about_receive = request.form.get('about_give')
+#     profile_receive = request.form.get('profile_give')
+   
+#     doc = {
+#         "name": name_receive,                               # id
+#         "profile_name": name_receive,                           # user's name is set to their id by default
+#         "profile_pic": "",                                          # profile image file name
+#         "profile_pic_real": "profile_pics/profile_placeholder.png", # a default profile image
+#         "profile_info": ""                                          # a profile description
+#     }
+#     db.users.insert_one(doc)
+#     return jsonify({'result': 'success'})
 
 @app.route('/adddestination')
 def add_destionation():
     return render_template('adddestination.html')
+
+@app.route('/adddestinaai')
+def add_destionasi():
+    sample_receive = request.args.get('sample_give')
+    print(sample_receive)
+    return jsonify({'msg': 'GET request complete!'})
 
 @app.route('/detailadm')
 def detail_adm():

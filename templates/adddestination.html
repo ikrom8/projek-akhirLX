@@ -34,44 +34,66 @@
 
     <script>
       function posting() {
-      let image = $("#image-title").val();
-      if (!image) {
-        return alert('Hey user, you forgot a title');
-      }
-      let kategori = $("#category").val();
-      if (!kategori) {
-        return alert('Hey user, you forgot a title');
-      }
-      let place = $("#name").val();
-      if (!place) {
-        return alert('Hey user, you forgot a description');
-      }
-      let deskripsi = $("#description").val();
-      if (!deskripsi) {
-        return alert('Hey user, you forgot a description');
-      }
-      console.log(image,kategori,place,)
+        let id = $("#ID").val();
+        if (!id) {
+          return alert("Masukkan ID!");
+        }
+        let image = $("#image-title").val();
+        if (!image) {
+          return alert("Masukan Gambar!");
+        }
+        let kategori = $("#category").val();
+        if (!kategori) {
+          return alert("Masukkan Kateogori!");
+        }
+        let place = $("#name").val();
+        if (!place) {
+          return alert("Masukkan Nama Destinasi");
+        }
+        let deskripsi = $("#description").val();
+        if (!deskripsi) {
+          return alert("Masukkan Deskripsi");
+        }
+        // console.log(
+        //   id,
+        //   "\n",
+        //   image,
+        //   "\n",
+        //   kategori,
+        //   "\n",
+        //   place,
+        //   "\n",
+        //   deskripsi
+        // );
 
+        $.ajax({
+          type: "GET",
+          url: "/adddestinasi?sample_give=sample-data",
+          data: {},
+          success: function (response) {
+            alert(response["msg"]);
+          },
+        });
 
-      // let form_data = new FormData();
+        // let form_data = new FormData();
 
-      // form_data.append('file_give', file);
-      // form_data.append('profile_give', profile);
-      // form_data.append("title_give", title);
-      // form_data.append("content_give", content);
+        // form_data.append('file_give', file);
+        // form_data.append('profile_give', profile);
+        // form_data.append("title_give", title);
+        // form_data.append("content_give", content);
 
-      // $.ajax({
-      //   type: 'POST',
-      //   url: '/diary',
-      //   data: form_data,
-      //   contentType: false,
-      //   processData: false,
-      //   success: function (response) {
-      //     console.log(response)
-      //     window.location.reload();
-      //   }
-      // })
-    }
+        // $.ajax({
+        //   type: 'POST',
+        //   url: '/diary',
+        //   data: form_data,
+        //   contentType: false,
+        //   processData: false,
+        //   success: function (response) {
+        //     console.log(response)
+        //     window.location.reload();
+        //   }
+        // })
+      }
     </script>
   </head>
   <body>
@@ -113,7 +135,10 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/discoveradm"
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/discoveradm"
                   >Discover</a
                 >
               </li>
@@ -134,15 +159,17 @@
       <hr />
     </div>
 
-   
-
     <section class="section is-medium">
       <div class="mb-3">
-        <label for="image-title" class="form-label">Choose Image </label>
-        <input class="form-control" type="file" id="image-title">
+        <label for="ID" class="form-label">Masukkan ID </label>
+        <input class="form-control" type="number" id="ID" />
       </div>
       <div class="mb-3">
-        <label for="category" class="form-label" >kategori</label>
+        <label for="image-title" class="form-label">Choose Image </label>
+        <input class="form-control" type="file" id="image-title" />
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">kategori</label>
         <input
           type="text"
           class="form-control"
@@ -152,12 +179,7 @@
       </div>
       <div class="mb-3">
         <label for="place" class="form-label">Nama Tempat</label>
-        <input
-          type="text"
-          class="form-control"
-          id="name"
-          placeholder="place"
-        />
+        <input type="text" class="form-control" id="name" placeholder="place" />
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Deskripsi</label>
@@ -169,63 +191,36 @@
         ></textarea>
       </div>
 
-      <div class="tourguide" style="margin-left: 80%;">
-        <h4>Tourguide :</h4>
+      <div class="tourguide" style="margin-left: 80%">
         <br />
         <button class="btn is-link is-outlined">
-          <figure class="image is-128x128" style="margin-left: 15px;">
-            <img
-              class="is-rounded"
-              src="https://bulma.io/images/placeholders/128x128.png"
-            />
-          </figure>
-          Tourguide 1
+          <a href="/addTGD" style="color: black; text-decoration: none"
+            >Tambah Tourguide</a
+          >
         </button>
       </div>
 
-      <div class="tourguide" style="margin-left: 80%;">
-        <br />
-        <button class="btn is-link is-outlined">
-          <figure class="image is-128x128" style="margin-left: 15px;">
-            <img
-              class="is-rounded"
-              src="https://bulma.io/images/placeholders/128x128.png"
-            />
-          </figure>
-          Tourguide 2
-        </button>
-      </div>
-
-      <div class="tourguide" style="margin-left: 80%;">
-
-        <br />
-        <button class="btn is-link is-outlined">
-          <figure class="image is-128x128" style="margin-left: 15px;">
-            <img
-              class="is-rounded"
-              src="{{url_for('static', filename = 'plus-black-symbol_icon-icons.com_73453.png')}}"
-            />
-          </figure>
-          Tambah Tourguide
-        </button>
-      </div>
-      </div>
-      <div class="row" style="margin-top: 30px;">
+      <div class="row" style="margin-top: 30px">
         <div class="col">
-          <button type="button" class="btn btn-dark" onclick="posting()">Simpan</button>
+          <button type="button" class="btn btn-dark" onclick="posting()">
+            Simpan
+          </button>
         </div>
         <div class="col">
-          <button type="button" class="btn btn-danger"><a href="/discoveradm" style="color: black; text-decoration: none;">Batal</a></button>
+          <button type="button" class="btn btn-danger">
+            <a href="/discoveradm" style="color: black; text-decoration: none"
+              >Batal</a
+            >
+          </button>
         </div>
       </div>
     </section>
     <footer>
       <p>ORACLE</p>
-  <nav>
-      <a href="/">Home</a> |
-      <a href="layanan.html">Layanan</a> |
-      <a href="/about">tentang kami</a>
-  </nav>
-  </footer>
+      <nav>
+        <a href="/">Home</a> | 
+        <a href="/about">tentang kami</a>
+      </nav>
+    </footer>
   </body>
 </html>

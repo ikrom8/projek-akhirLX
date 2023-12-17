@@ -12,6 +12,52 @@
 
     <!-- link Css -->
     <link rel="stylesheet" href="/static/style.css">
+
+    <script>      
+    // function posting() {
+    //   let name = $("#tourguide_name").val();
+    //   if (!name) {
+    //     return alert('Masukan nama tourguide');
+    //   }
+    //   let umur = $("#tourguide_age").val();
+    //   if (!umur) {
+    //     return alert('Masukkan umur tourgide');
+    //   }
+    //   var selectItem = document.getElementById('tourguide_gender').value;
+    //     var kelamin= selectItem.options[selectItem.selectedIndex].text;
+    //   if (kelamin == 0) {
+    //     return alert('Masukkan gender tourguide');
+    //   }
+    //   let about = $("#tourguide_about").val();
+    //   if (!about) {
+    //     return alert('Masukkan Deskripsi Tourguide');
+    //   }
+
+
+
+    //   let profile = $("#tourguide_photo").prop("files")[0];
+    //   let form_data = new FormData();
+
+    //   form_data.append('name_give', name);
+    //   form_data.append('umur_give', umur);
+    //   form_data.append("gender_give", kelamin);
+    //   form_data.append("about_give", about);
+    //   form_data.append("profile_give", profile);
+    //     $.ajax({
+    //     type: 'POST',
+    //     url: '/addTGD/save',
+    //     data: form_data,
+    //     contentType: false,
+    //     processData: false,
+    //     success: function (response) {
+    //       console.log(response)
+    //       window.location.reload();
+    //     }
+    //   })
+    // }
+
+
+    </script>
 </head>
 
 <body>
@@ -76,6 +122,10 @@
 
     <div class="container mt-5">
         <form method="POST" action="" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="ID_tourguide" class="form-label">Nama</label>
+            <input type="number" class="form-control" id="ID_tourguide" name="ID_tourguide" required>
+        </div>
             <div class="mb-3">
                 <label for="tourguide_name" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="tourguide_name" name="tourguide_name" required>
@@ -100,7 +150,7 @@
                 <label for="tourguide_photo" class="form-label">Foto</label>
                 <input type="file" class="form-control" id="tourguide_photo" name="tourguide_photo" accept="image/*" required>
             </div>
-            <button type="submit" class="btn btn-dark">SAVE</button>
+            <button type="submit" class="btn btn-dark" onclick="posting()">SAVE</button>
             <button type="submit" class="btn btn-dark">CANCEL</button>
         </form>
     </div>
