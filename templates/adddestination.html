@@ -35,64 +35,37 @@
     <script>
       function posting() {
         let id = $("#ID").val();
-        if (!id) {
-          return alert("Masukkan ID!");
-        }
-        let image = $("#image-title").val();
-        if (!image) {
-          return alert("Masukan Gambar!");
-        }
+        let image = $("#image").val();
         let kategori = $("#category").val();
-        if (!kategori) {
-          return alert("Masukkan Kateogori!");
-        }
-        let place = $("#name").val();
-        if (!place) {
-          return alert("Masukkan Nama Destinasi");
-        }
+        let place = $("#place").val();
         let deskripsi = $("#description").val();
-        if (!deskripsi) {
-          return alert("Masukkan Deskripsi");
-        }
-        // console.log(
-        //   id,
-        //   "\n",
-        //   image,
-        //   "\n",
-        //   kategori,
-        //   "\n",
-        //   place,
-        //   "\n",
-        //   deskripsi
-        // );
+        let today = new Date().toISOString();
 
         $.ajax({
-          type: "GET",
-          url: "/adddestinasi?sample_give=sample-data",
-          data: {},
+          type: "POST",
+          url: "/adddestinasi",
+          data: {
+            id_give: id,
+            image_give: image,
+            kategori_give: kategori,
+            place_give: place,
+            deskripsi_give: deskripsi,
+          },
           success: function (response) {
-            alert(response["msg"]);
+            if (response === "success") {
+              alert("Destinasi berhasil ditambahkan!");
+              window.location.reload();
+            } else {
+              alert(
+                "Destinasi berhasil ditambahkan!"
+              );
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Terjadi kesalahan AJAX: " + error);
+            alert("Destinasi berhasil ditambahkan!");
           },
         });
-
-        // let form_data = new FormData();
-
-        // form_data.append('file_give', file);
-        // form_data.append('profile_give', profile);
-        // form_data.append("title_give", title);
-        // form_data.append("content_give", content);
-
-        // $.ajax({
-        //   type: 'POST',
-        //   url: '/diary',
-        //   data: form_data,
-        //   contentType: false,
-        //   processData: false,
-        //   success: function (response) {
-        //     console.log(response)
-        //     window.location.reload();
-        //   }
-        // })
       }
     </script>
   </head>
@@ -165,8 +138,8 @@
         <input class="form-control" type="number" id="ID" />
       </div>
       <div class="mb-3">
-        <label for="image-title" class="form-label">Choose Image </label>
-        <input class="form-control" type="file" id="image-title" />
+        <label for="image" class="form-label">Choose Image </label>
+        <input class="form-control" type="file" id="image" />
       </div>
       <div class="mb-3">
         <label for="category" class="form-label">kategori</label>
@@ -179,7 +152,12 @@
       </div>
       <div class="mb-3">
         <label for="place" class="form-label">Nama Tempat</label>
-        <input type="text" class="form-control" id="name" placeholder="place" />
+        <input
+          type="text"
+          class="form-control"
+          id="place"
+          placeholder="name place"
+        />
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Deskripsi</label>
@@ -187,7 +165,7 @@
           class="form-control"
           id="description"
           rows="3"
-          placeholder="Description"
+          placeholder="description"
         ></textarea>
       </div>
 
@@ -218,7 +196,7 @@
     <footer>
       <p>ORACLE</p>
       <nav>
-        <a href="/">Home</a> | 
+        <a href="/">Home</a> |
         <a href="/about">tentang kami</a>
       </nav>
     </footer>

@@ -1,169 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tambahkan Tourguide</title>
 
-    <!-- link Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+       <!-- link bulma -->
+       <link
+       rel="stylesheet"
+       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+     />
+     <!-- link bootstrap -->
+     <link
+       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+       rel="stylesheet"
+       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+       crossorigin="anonymous"
+     />
+     <script
+       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+       crossorigin="anonymous"
+     ></script>
+     <!-- Jquery CDN -->
+     <script
+       src="https://code.jquery.com/jquery-3.7.1.js"
+       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+       crossorigin="anonymous"
+     ></script>
+ 
+     <!-- link Css -->
+     <link rel="stylesheet" href="/static/style.css" />
+    <script>
+      function posting() {
+        let id = $("#ID_tourguide").val();
+        let name = $("#tourguide_name").val();
+        let age = $("#tourguide_age").val();
 
-    <!-- link Css -->
-    <link rel="stylesheet" href="/static/style.css">
+        let gender = $("#tourguide_gender").val();
 
-    <script>      
-    // function posting() {
-    //   let name = $("#tourguide_name").val();
-    //   if (!name) {
-    //     return alert('Masukan nama tourguide');
-    //   }
-    //   let umur = $("#tourguide_age").val();
-    //   if (!umur) {
-    //     return alert('Masukkan umur tourgide');
-    //   }
-    //   var selectItem = document.getElementById('tourguide_gender').value;
-    //     var kelamin= selectItem.options[selectItem.selectedIndex].text;
-    //   if (kelamin == 0) {
-    //     return alert('Masukkan gender tourguide');
-    //   }
-    //   let about = $("#tourguide_about").val();
-    //   if (!about) {
-    //     return alert('Masukkan Deskripsi Tourguide');
-    //   }
+        let about = $("#tourguide_about").val();
+        let image = $("#tourguide_photo").val();
+        let today = new Date().toISOString();
 
-
-
-    //   let profile = $("#tourguide_photo").prop("files")[0];
-    //   let form_data = new FormData();
-
-    //   form_data.append('name_give', name);
-    //   form_data.append('umur_give', umur);
-    //   form_data.append("gender_give", kelamin);
-    //   form_data.append("about_give", about);
-    //   form_data.append("profile_give", profile);
-    //     $.ajax({
-    //     type: 'POST',
-    //     url: '/addTGD/save',
-    //     data: form_data,
-    //     contentType: false,
-    //     processData: false,
-    //     success: function (response) {
-    //       console.log(response)
-    //       window.location.reload();
-    //     }
-    //   })
-    // }
-
-
+        $.ajax({
+          type: "POST",
+          url: "/addTourGD",
+          data: {
+            id_give: id,
+            name_give: name,
+            umur_give: age,
+            gender_give: gender,
+            about_give: about,
+            about_give: about,
+            profile_give: image,
+          },
+          success: function (response) {
+            if (response === "success") {
+              alert("berhasil ditambahkan!");
+              window.location.href('/addTGD');
+            } else {
+              alert("gagal ditambahkan!");
+            }
+          },
+        });
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-          <img
-            src="{{url_for('static', filename = 'oracle_logo.png')}}"
-            width="112"
-            height="28"
-          />
-          <a class="navbar-brand" href="/about">Oracle</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasDarkNavbar"
-            aria-controls="offcanvasDarkNavbar"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="offcanvas offcanvas-end text-bg-dark"
-            tabindex="-1"
-            id="offcanvasDarkNavbar"
-            aria-labelledby="offcanvasDarkNavbarLabel"
-          >
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-                Traveluki
-              </h5>
-              <button
-                type="button"
-                class="btn-close btn-close-white"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/discoveradm"
-                    >Discover</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/cekpesanan">Cek Pesanan</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/about">About</a>
-                </li>
-              </ul>
-            </div>
+      <div class="container-fluid">
+        <img
+          src="{{url_for('static', filename = 'oracle_logo.png')}}"
+          width="112"
+          height="28"
+        />
+        <a class="navbar-brand" href="/about">Oracle</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasDarkNavbar"
+          aria-controls="offcanvasDarkNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+              Traveluki
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/discoveradm"
+                  >Discover</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/cekpesanan">Cek Pesanan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
 
     <!-- Header -->
     <div class="container-fluid bg-dark text-white py-3">
-        <h2 class="mb-0">Tourguide</h2>
+      <h2 class="mb-0">Tourguide</h2>
     </div>
 
     <div class="container mt-5">
-        <form method="POST" action="" enctype="multipart/form-data">
-          <div class="mb-3">
-            <label for="ID_tourguide" class="form-label">Nama</label>
-            <input type="number" class="form-control" id="ID_tourguide" name="ID_tourguide" required>
+      <form method="POST" action="" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="ID_tourguide" class="form-label">ID</label>
+          <input
+            type="number"
+            class="form-control"
+            id="ID_tourguide"
+            name="ID_tourguide"
+            required
+          />
         </div>
-            <div class="mb-3">
-                <label for="tourguide_name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="tourguide_name" name="tourguide_name" required>
-            </div>
-            <div class="mb-3">
-                <label for="tourguide_age" class="form-label">Umur</label>
-                <input type="number" class="form-control" id="tourguide_age" name="tourguide_age" required>
-            </div>
-            <div class="mb-3">
-                <label for="tourguide_gender" class="form-label">Jenis Kelamin</label>
-                <select class="form-select" id="tourguide_gender" name="tourguide_gender" required>
-                    <option value="male">Pilih</option>
-                    <option value="male">Laki-laki</option>
-                    <option value="female">Perempuan</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="tourguide_about" class="form-label">About</label>
-                <textarea class="form-control" id="tourguide_about" name="tourguide_about" rows="3" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="tourguide_photo" class="form-label">Foto</label>
-                <input type="file" class="form-control" id="tourguide_photo" name="tourguide_photo" accept="image/*" required>
-            </div>
-            <button type="submit" class="btn btn-dark" onclick="posting()">SAVE</button>
-            <button type="submit" class="btn btn-dark">CANCEL</button>
-        </form>
+        <div class="mb-3">
+          <label for="tourguide_name" class="form-label">Nama</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tourguide_name"
+            name="tourguide_name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="tourguide_age" class="form-label">Umur</label>
+          <input
+            type="number"
+            class="form-control"
+            id="tourguide_age"
+            name="tourguide_age"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="tourguide_gender" class="form-label">Jenis Kelamin</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tourguide_gender"
+            name="tourguide_gender"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="tourguide_about" class="form-label">About</label>
+          <textarea
+            class="form-control"
+            id="tourguide_about"
+            name="tourguide_about"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="tourguide_photo" class="form-label">Foto</label>
+          <input
+            type="file"
+            class="form-control"
+            id="tourguide_photo"
+            name="tourguide_photo"
+            accept="image/*"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-dark" onclick="posting()">
+          SIMPAN
+        </button>
+        <button type="submit" class="btn btn-dark">KEMBALI</button>
+      </form>
     </div>
     <footer>
-        <p>ORACLE</p>
-    <nav>
-        <a href="/">Home</a> |
-        <a href="layanan.html">Layanan</a> |
+      <p>ORACLE</p>
+      <nav>
+        <a href="/">Home</a> | <a href="layanan.html">Layanan</a> |
         <a href="/about">tentang kami</a>
-    </nav>
+      </nav>
     </footer>
 
     <!-- link Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

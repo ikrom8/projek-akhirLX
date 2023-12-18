@@ -12,11 +12,12 @@ import datetime
 from datetime import datetime 
 import hashlib
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
 
 app = Flask(__name__)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.config['UPLOAD_FOLDER'] = './static/profile_pics'
+app.config['UPLOAD_FOLDER'] = './static/default-image.jpg'
 
 SECRET_KEY = 'TRAVELUKI'
 # hanya untuk latihan, dan sebaik nya dibuat lebih susah untuk projek
@@ -72,6 +73,11 @@ def about():
 def discover_admin():
     return render_template('discoveradm.html')
 
+@app.route('/get_data')
+def get_data():
+    articles = list(db.destination.find({},{'_id' : False}))
+    return jsonify({'articles':articles})
+
 @app.route('/edit-detail')
 def edit_detail():
     return render_template('edit_detail.html')
@@ -80,37 +86,62 @@ def edit_detail():
 def edit_tgd():
     return render_template('editTGD.html')
 
-@app.route('/addTGD',)
-def add_tgd():
+@app.route('/addTGD', methods=["GET"])
+def show_tgd():
     return render_template('addTGD.html')
 
-# @app.route('/addTGD/save', methods=['POST'])
-# def save_tgd():
-#     name_receive = request.form.get('name_give')
-#     age_receive = request.form.get('umur_give')
-#     gender_receive = request.form.get('gender_give')
-#     about_receive = request.form.get('about_give')
-#     profile_receive = request.form.get('profile_give')
-   
-#     doc = {
-#         "name": name_receive,                               # id
-#         "profile_name": name_receive,                           # user's name is set to their id by default
-#         "profile_pic": "",                                          # profile image file name
-#         "profile_pic_real": "profile_pics/profile_placeholder.png", # a default profile image
-#         "profile_info": ""                                          # a profile description
-#     }
-#     db.users.insert_one(doc)
-#     return jsonify({'result': 'success'})
+@app.route('/addTourGD', methods=["POST"])
+def add_tour_guide():
+    id_give = request.form.get('id_give')
+    name_give = request.form.get('name_give')
+    age_give = request.form.get('umur_give')
+    gender_give = request.form.get('gender_give')
+    about_give = request.form.get('about_give')
+    profile_give = request.form.get('profile_give')
+
+    # Simpan data tour guide ke dalam list
+    tour_guide = {
+        'id': id_give,
+        'name': name_give,
+        'age': age_give,
+        'gender': gender_give,
+        'about': about_give,
+        'profile': profile_give
+    }
+    db.tourguide.insert_one(tour_guide)
+
+    return jsonify({'status': 'success'})
+
 
 @app.route('/adddestination')
 def add_destionation():
     return render_template('adddestination.html')
 
-@app.route('/adddestinaai')
-def add_destionasi():
-    sample_receive = request.args.get('sample_give')
-    print(sample_receive)
-    return jsonify({'msg': 'GET request complete!'})
+# @app.route('/adddestinasi',methods=['GET'])
+# def show_destinasi():
+#     # sample_receive= request.args.get('sample_give')
+#     # print(sample_receive)
+#     articles = list(db.destination.find({},{'_id' : False}))
+#     return jsonify({'articles':articles})
+
+@app.route('/adddestinasi', methods=['POST'])
+def add_destinasi():
+        
+        id_receive = request.form["id_give"]
+        image_receive = request.form["image_give"]
+        kategori_receive = request.form["kategori_give"]
+        place_receive = request.form["place_give"]
+        deskripsi_receive = request.form["deskripsi_give"]
+        
+        doc = {
+            'ID' : id_receive,
+            "image"  : image_receive,
+            "category" : kategori_receive,
+            "name_place" : place_receive,
+            "description" : deskripsi_receive,
+        }
+        db.destinasi.insert_one(doc)
+        return jsonify({"result": "success", "msg": "Posting successful!"})
 
 @app.route('/detailadm')
 def detail_adm():
