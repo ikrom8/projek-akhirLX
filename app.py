@@ -65,6 +65,29 @@ def discover():
 def detail():
     return render_template('detail.html')
 
+@app.route('/get_destination_detail', methods=['GET'])
+def get_destination_detail():
+    destination_id = request.args.get('destination_id')
+
+    # Mengambil detail destinasi berdasarkan ID
+    destination = db.destinasi.find_one({'ID': destination_id})
+
+    if destination:
+        # Mengambil data tourguide yang terkait dengan destinasi
+        tourguides = db.tourguide.find({'destination_id': destination_id})
+
+        # Mengonversi data ke format yang sesuai untuk dikirim ke frontend
+        destination_data = {
+            'category': destination['category'],
+            'name': destination['name_place'],
+            'description': destination['description'],
+            'tourguides': list(tourguides)
+        }
+
+        return jsonify({'destination_data': destination_data})
+    else:
+        return jsonify({'error': 'Destination not found'})
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -75,7 +98,7 @@ def discover_admin():
 
 @app.route('/get_data')
 def get_data():
-    articles = list(db.destination.find({},{'_id' : False}))
+    articles = list(db.destinasi.find({},{'_id' : False}))
     return jsonify({'articles':articles})
 
 @app.route('/edit-detail')
@@ -90,23 +113,32 @@ def edit_tgd():
 def show_tgd():
     return render_template('addTGD.html')
 
+@app.route('/get_tourguides_by_destination', methods=['GET'])
+def get_tourguides_by_destination():
+    destination_id = request.args.get('destination_id')
+    tourguides = db.tourguide.find({'destination_id': destination_id})
+    return jsonify({'tourguides': list(tourguides)})
+
+
 @app.route('/addTourGD', methods=["POST"])
 def add_tour_guide():
-    id_give = request.form.get('id_give')
-    name_give = request.form.get('name_give')
-    age_give = request.form.get('umur_give')
-    gender_give = request.form.get('gender_give')
-    about_give = request.form.get('about_give')
-    profile_give = request.form.get('profile_give')
-
+    id_receive = request.form.get('id_give')
+    name_receive = request.form.get('name_give')
+    age_receive = request.form.get('umur_give')
+    gender_receive = request.form.get('gender_give')
+    about_receive = request.form.get('about_give')
+    profile_receive = request.form.get('profile_give')
+    destination_id = request.form.get('destination_id')
+    
     # Simpan data tour guide ke dalam list
     tour_guide = {
-        'id': id_give,
-        'name': name_give,
-        'age': age_give,
-        'gender': gender_give,
-        'about': about_give,
-        'profile': profile_give
+        'id_tourguide': id_receive,
+        'name': name_receive,
+        'age': age_receive,
+        'gender': gender_receive,
+        'about': about_receive,
+        'profile': profile_receive,
+        'destination_id': destination_id
     }
     db.tourguide.insert_one(tour_guide)
 
@@ -116,13 +148,15 @@ def add_tour_guide():
 @app.route('/adddestination')
 def add_destionation():
     return render_template('adddestination.html')
+    
+   
 
-# @app.route('/adddestinasi',methods=['GET'])
-# def show_destinasi():
-#     # sample_receive= request.args.get('sample_give')
-#     # print(sample_receive)
-#     articles = list(db.destination.find({},{'_id' : False}))
-#     return jsonify({'articles':articles})
+@app.route('/adddestinasi',methods=['GET'])
+def show_destinasi():
+    # sample_receive= request.args.get('sample_give')
+    # print(sample_receive)
+    articles = list(db.destination.find({},{'_id' : False}))
+    return jsonify({'articles':articles})
 
 @app.route('/adddestinasi', methods=['POST'])
 def add_destinasi():
@@ -132,6 +166,7 @@ def add_destinasi():
         kategori_receive = request.form["kategori_give"]
         place_receive = request.form["place_give"]
         deskripsi_receive = request.form["deskripsi_give"]
+        destination_id = request.form["destination_id"]
         
         doc = {
             'ID' : id_receive,
@@ -139,6 +174,7 @@ def add_destinasi():
             "category" : kategori_receive,
             "name_place" : place_receive,
             "description" : deskripsi_receive,
+            'destination_id': destination_id
         }
         db.destinasi.insert_one(doc)
         return jsonify({"result": "success", "msg": "Posting successful!"})

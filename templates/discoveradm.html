@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/static/style.css" />
 
     <script>
-          function listing() {
+      function listing() {
       $.ajax({
         type: 'GET',
         url: '/get_data',
@@ -41,28 +41,40 @@
         success: function (response) {
           let articles = response["articles"];
           for (let i = 0; i < articles.length; i++) {
-            let id = articles[i]["ID"];
+            let ID = articles[i]["ID"];
             let image = articles[i]["image"];
-            let kategori = articles[i]["category"];
+            let name_place = articles[i]["name_place"];
+            let category = articles[i]["category"]
+            let Deskripsi = articles[i]["description"];
+            let id_destinasi = articles[i][""]
             let file = articles[i]['file'];
 
             let time= articles[i]['time'] || '????.??.?';
 
             let profile = articles[i]['profile'];
             let temp_html = `
-        <div class="col-4">
-          <div class="card">
-            <img src="../${file} " class="card-img-top" alt="..." />
-            <div class="card-body">
-              <img src="../${profile} " class="card-img-top" alt="..." id = "profile"/>
-              <h5 class="card-title">${title}</h5>
-              <p class="card-text">${content}</p>
-              <h6 class="card-subtitle mb-2 text-muted">${time}</h6>
-            </div>
-          </div>
-        </div>
+          <tr>
+          <th scope="row">${id_destinasi}</th>
+          <th scope="row">${image}</th>
+          <th scope="row">${name_place}</th>
+          <th scope="row">${category}</th>
+          <th scope="row">${Deskripsi}</th>
+          <td>Asia</td>
+          <td>lorem .... <a href="/detailadm">lainnya</a></td>
+          <td>Tourguide 1</td>
+          <td>
+            <button class="button is-link">
+              <a
+                href="/edit-detail"
+                style="color: white; text-decoration-line: none"
+                >Edit</a
+              >
+            </button>
+          </td>
+          <td><button class="button is-danger">Hapus</button></td>
+          <tr>
                 `;
-            $("#cards-box").append(temp_html);
+            $("#data-destinasi").append(temp_html);
           }
         }
       });
@@ -130,7 +142,7 @@
       <hr />
     </div>
 
-    <table class="table">
+    <table class="table" >
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -140,26 +152,17 @@
           <th scope="col">Deskripsi</th>
           <th scope="col">Tourguide</th>
           <th scope="col">Edit</th>
-          <th scope="col">Hapus ww</th>
+          <th scope="col">Hapus</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="data-destinasi">
         <tr>
           <th scope="row">img</th>
           <th scope="row">Bali</th>
           <td>Asia</td>
           <td>lorem .... <a href="/detailadm">lainnya</a></td>
           <td>Tourguide 1</td>
-          <td>
-            <button class="button is-link">
-              <a
-                href="/edit-detail"
-                style="color: white; text-decoration-line: none"
-                >Edit</a
-              >
-            </button>
-          </td>
-          <td><button class="button is-danger">Hapus</button></td>
+          
         </tr>
         <tr>
           <th scope="row">img</th>
@@ -182,6 +185,7 @@
     </table>
 
     <button class="button is-link" style="margin-top: 20px;"><a href="/adddestination" style="color: black; text-decoration: none;">Tambah Destinasi</a></button>
+    <button class="button is-link" onclick="listing()">Sync</button>
   </body>
   <footer style="margin-top: 20px;">
     <p>ORACLE</p>
