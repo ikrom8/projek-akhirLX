@@ -17,6 +17,7 @@ from datetime import datetime
 import hashlib
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
+import bcrypt
 
 app = Flask(__name__)
 
@@ -46,11 +47,45 @@ def home():
 @app.route('/sign_up')
 def sign_up():
     return render_template ('sign_up.html')
+
+@app.route('/sign_up/save',methods=["POST"])
+def add_user(username,email, password):
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    user = {
+        'username': username,
+        'email' : email,
+        'password': hashed_password
+    }
+    db.users.insert_one(user)
+
+@app.route('/get_user')
+def get_user(username):
+    return db.users.find_one({'username': username})
+
+@app.route('/is_valid')
+def is_valid_password(user, password):
+    if user:
+        return bcrypt.checkpw(password.encode('utf-8'), user['password'])
+    return False
     
 
 @app.route('/login')
-def login():
+def show_login():
     return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form.get('email')
+    password = request.form.get('pass')
+
+    user = get_user(username)
+
+    if user and is_valid_password(user, password):
+        # Berhasil login, Anda dapat mengirimkan token atau menyimpan sesi di sini
+        return jsonify({'status': 'success', 'message': 'Login successful'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Invalid username or password'})
+
 
 @app.route('/discover')
 def discover():

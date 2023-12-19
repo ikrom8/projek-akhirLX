@@ -75,6 +75,46 @@
       }
     </style>
 
+    <script>
+        $(document).ready(function () {
+    // Menangani klik tombol sign up
+    $('#signupButton').click(function () {
+      // Mengambil nilai dari inputan username, password, dan konfirmasi password
+      let username = $('#fullname').val();
+      let email = $('#email').val();
+      let password = $('#pass').val();
+      
+
+
+
+      // Melakukan permintaan Ajax ke backend Flask
+      $.ajax({
+        type: 'POST',
+        url: '/sign_up/save',
+        data: { 
+          username_give: username,
+          email_give : email,
+          password_give: password },
+        success: function (response) {
+          // Menangani respons dari server
+          if (response.status === 'success') {
+            // Redirect ke halaman login atau lakukan aksi sesuai kebutuhan
+            alert('Pendaftaran berhasil. Silakan login.');
+            window.location.href = '/login';  // Ganti dengan URL login yang sesuai
+          } else {
+            // Menampilkan pesan kesalahan
+            alert('Pendaftaran gagal: ' + response.message);
+          }
+        },
+        error: function () {
+          // Menampilkan pesan kesalahan jika terjadi kesalahan permintaan
+          alert('Terjadi kesalahan saat melakukan pendaftaran');
+        }
+      });
+    });
+  });
+    </script>
+
     <title>Register</title>
   </head>
   <body>
@@ -116,7 +156,7 @@
           <!-- Additional registration fields can be added as needed -->
 
           <button
-            class="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300"
+            class="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300" id="signupButton"
           >
             Register
           </button>
